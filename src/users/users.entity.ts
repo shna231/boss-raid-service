@@ -1,10 +1,19 @@
-import { Column, Entity, PrimaryColumn } from 'typeorm';
+import { BossRaidHistory } from 'src/bossraid/bossraid.entity';
+import {
+  CreateDateColumn,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity()
 export class Users {
-  @PrimaryColumn({ type: 'varchar', length: '20' })
-  id: string;
+  @PrimaryGeneratedColumn({ comment: '유저 아이디' })
+  userId!: number;
 
-  @Column({ comment: '보스 레이드 기록' })
-  raid_record_id: number;
+  @OneToMany(() => BossRaidHistory, (bossRaidHistory) => bossRaidHistory.userId)
+  bossRaidHistory?: BossRaidHistory[];
+
+  @CreateDateColumn()
+  createdAt;
 }
