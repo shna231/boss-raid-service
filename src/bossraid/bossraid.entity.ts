@@ -10,14 +10,14 @@ import {
 @Entity()
 export class BossRaidHistory {
   @PrimaryGeneratedColumn({ comment: '보스레이드 기록 아이디' })
-  id!: number;
+  raidRecordId!: number;
 
   @ManyToOne(() => Users, (user) => user.bossRaidHistory, { nullable: false })
   @JoinColumn({ name: 'user' })
   userId!: Users;
 
-  @Column({ comment: '점수', nullable: true })
-  score?: number;
+  @Column({ comment: '점수', nullable: true, default: 0 })
+  score!: number;
 
   @Column({ comment: '입장 시간' })
   enterTime!: string;
