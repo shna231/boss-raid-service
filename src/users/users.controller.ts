@@ -1,4 +1,4 @@
-import { Controller, Post } from '@nestjs/common';
+import { Controller, Get, Post, Query } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { UsersService } from './users.service';
 
@@ -14,5 +14,14 @@ export class UsersController {
   })
   async createUser() {
     return await this.usersService.createUser();
+  }
+
+  @Get(':userId')
+  @ApiOperation({
+    summary: '유저 조회 API',
+    description: '해당 유저의 보스레이드 기록을 조회합니다.',
+  })
+  async getUserHistory(@Query('userId') userId: number) {
+    return await this.usersService.getUserHistory(userId);
   }
 }
