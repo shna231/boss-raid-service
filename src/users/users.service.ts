@@ -56,7 +56,10 @@ export class UsersService {
         message: '유저의 보스레이드 기록을 조회합니다.',
       });
     } catch (NotFoundException) {
-      throw new NotFoundException();
+      return Object.assign({
+        statusCode: 404,
+        message: '해당 아이디의 유저가 존재하지 않습니다.',
+      });
     }
   }
 }
