@@ -13,7 +13,7 @@ export class BossRaidHistory {
   raidRecordId!: number;
 
   @ManyToOne(() => Users, (user) => user.bossRaidHistory, { nullable: false })
-  @JoinColumn({ name: 'user' })
+  @JoinColumn({ name: 'userId' })
   userId!: Users;
 
   @Column({ comment: '점수', nullable: true, default: 0 })

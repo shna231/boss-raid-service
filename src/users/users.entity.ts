@@ -2,6 +2,7 @@ import { BossRaidHistory } from 'src/bossraid/bossraid.entity';
 import {
   CreateDateColumn,
   Entity,
+  JoinTable,
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
@@ -12,6 +13,7 @@ export class Users {
   userId!: number;
 
   @OneToMany(() => BossRaidHistory, (bossRaidHistory) => bossRaidHistory.userId)
+  @JoinTable()
   bossRaidHistory?: BossRaidHistory[];
 
   @CreateDateColumn()
