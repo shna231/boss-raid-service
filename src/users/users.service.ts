@@ -1,7 +1,7 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { BossRaidHistory } from 'src/bossraid/bossraid.entity';
-import { Not, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 import { Users } from './users.entity';
 
 @Injectable()
@@ -13,8 +13,7 @@ export class UsersService {
 
   /**  새로운 유저 생성
    *
-   * parameter : X
-   * return :userId(자동 생성)
+   * @returns userId : number (자동 생성된 유저 아이디)
    * */
   async createUser() {
     const empty_history: BossRaidHistory[] = [];
@@ -31,8 +30,10 @@ export class UsersService {
 
   /**  유저 보스레이드 기록 조회
    *
-   * parameter : userId
-   * return : totalScore, bossRaidHistory[]
+   * @param userId 유저 아이디
+   *
+   * @returns totalScore : number (점수 총합)
+   * @retunrs bossRaidHistory : bossRaidHistory[] (보스레이드 모든 기록)
    * */
   async getUserHistory(userId: number) {
     try {
