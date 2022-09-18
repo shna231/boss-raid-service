@@ -1,6 +1,6 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Patch, Post } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
-import { EnterBossraidRequest } from './bossraid.dto';
+import { EnterBossraidRequest, ShutdownBossraidRequest } from './bossraid.dto';
 import { BossraidService } from './bossraid.service';
 
 @Controller('api/v1/bossRaid')
@@ -25,5 +25,15 @@ export class BossraidController {
   })
   async enterBossraid(@Body() req: EnterBossraidRequest) {
     return await this.bossraidService.createBossraidHistory(req);
+  }
+
+  @Patch('end')
+  @ApiOperation({
+    summary: '보스레이드 종료 API',
+    description:
+      '보스레이드를 종료합니다. 현 버전에서는 score가 없데이트되지 않습니다.',
+  })
+  async shutdownBossraid(@Body() req: ShutdownBossraidRequest) {
+    return await this.bossraidService.shutdownBossraidHistory(req);
   }
 }
